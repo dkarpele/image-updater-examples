@@ -6,6 +6,7 @@ metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: busybox=busybox:1.36.x
     argocd-image-updater.argoproj.io/update-strategy: semver
+    argocd-image-updater.argoproj.io/force-update: "true"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
