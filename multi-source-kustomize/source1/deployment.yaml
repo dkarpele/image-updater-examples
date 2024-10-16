@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multi-source-kustomize
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multi-source-kustomize
+  template:
+    metadata:
+      labels:
+        app: multi-source-kustomize
+    spec:
+      containers:
+      - name: busybox
+        image: busybox:1.36.0
+
