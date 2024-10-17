@@ -1,6 +1,7 @@
 This example contains a single-source app and a multi-source app, both using the same 
 `deployment.yaml`. You can compare the observe how image-updater works for these 2 types
-of applications.
+of applications. `deployment.yaml` uses an old version of nginx: `1.16.0`, and upon running
+image-updater, the container image tag should be updated to `1.16.1`
 
 ## test with multi-source-app
 ```bash
@@ -36,7 +37,7 @@ INFO[0000] Processing results: applications=1 images_considered=1 images_skipped
 INFO[0000] Finished.
 
 # to check the updated image tag
-get pod -l app=multi-source-kustomize -n argocd -o jsonpath='{.items[0].spec.containers[0].image}'
+kubectl get pod -l app=multi-source-kustomize -n argocd -o jsonpath='{.items[0].spec.containers[0].image}'
 nginx:1.16.1
 
 # to delete the multi-source-app
