@@ -4,7 +4,7 @@ metadata:
   name: single-source-kustomize
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: nginx=nginx:1.16.0
+    argocd-image-updater.argoproj.io/image-list: nginx=nginx:1.16.x
     argocd-image-updater.argoproj.io/update-strategy: semver
     argocd-image-updater.argoproj.io/force-update: "true"
   finalizers:
@@ -17,7 +17,7 @@ spec:
   source:
       repoURL: https://github.com/chengfang/image-updater-examples.git
       targetRevision: main
-      path: single-source-kustomize/source1
+      path: multi-source-kustomize/source1
   syncPolicy:
     automated:
       prune: true

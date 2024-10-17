@@ -1,5 +1,6 @@
 This example contains a single-source app and a multi-source app, both using the same 
-`deployment.yaml`
+`deployment.yaml`. You can compare the observe how image-updater works for these 2 types
+of applications.
 
 ## test with multi-source-app
 ```bash
@@ -41,4 +42,19 @@ nginx:1.16.1
 # to delete the multi-source-app
 kubectl delete -f multi-source-kustomize/app/multi-source-app.yaml
 application.argoproj.io "multi-source-kustomize" deleted
+```
+## test with single-source-app
+```bash
+# to install single-source-app Argo CD application
+kubectl apply -f multi-source-kustomize/app/single-source-app.yaml
+
+# to view the current container image name and image tag
+kubectl get pod -l app=multi-source-kustomize -n argocd -o jsonpath='{.items[0].spec.containers[0].image}'
+nginx:1.16.0
+
+# to run image-updater from command line
+../image-updater/dist/argocd-image-updater run --once --registries-conf-path=""
+
+# to delete the app
+kubectl delete -f multi-source-kustomize/app/single-source-app.yaml 
 ```
