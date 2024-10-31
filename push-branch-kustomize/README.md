@@ -5,6 +5,9 @@ image-updater, the container image tag should be updated to `1.16.1`
 
 ## test push-branch-kustomize app
 ```bash
+# to create the secret to access the git repo
+kubectl -n argocd create secret generic git-creds --from-literal=username=xxx --from-literal=password=xxx
+
 # to install the push-branch-kustomize Argo CD application as a plain manifest
 kubectl apply -f push-branch-kustomize/app/push-branch-kustomize.yaml
 
