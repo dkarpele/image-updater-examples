@@ -1,2 +1,7 @@
 resources:
   - deployment.yaml
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: kustomization-write-target

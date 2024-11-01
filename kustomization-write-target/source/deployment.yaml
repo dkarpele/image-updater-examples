@@ -4,13 +4,7 @@ metadata:
   name: kustomization-write-target
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: kustomization-write-target
   template:
-    metadata:
-      labels:
-        app: kustomization-write-target
     spec:
       containers:
       - name: nginx
