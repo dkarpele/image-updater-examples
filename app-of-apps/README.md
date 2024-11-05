@@ -7,9 +7,21 @@ This is a sample Argo CD application using app-of-apps pattern. It contains the 
 image-updater, the container image tag should be updated to `1.11.x` for app1,
 and to `1.12.x` for app2.
 
+This sample can be run with write-back-method `git` with the following annotations
+on `app1.yaml` and `app2.yaml`:
+```yaml
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+    argocd-image-updater.argoproj.io/write-back-target: kustomization
+```
+Or run with the default `argocd` write-back-target by removing the above 2 annotations,
+or by setting write-back-target to `argocd`:
+```yaml
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+```
+
 ## test app-of-apps
 ```bash
-# to create the secret to access the git repo
+# to create the secret to access the git repo, required if using git write-back-method
 kubectl -n argocd create secret generic git-creds --from-literal=username=xxx --from-literal=password=xxx
 
 # to install root app and child apps
