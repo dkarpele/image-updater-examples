@@ -1,11 +1,8 @@
 resources:
-- ../../base
+  - ../../base
 nameSuffix: "1"
 labels:
-- includeSelectors: true
-  includeTemplates: true
-  pairs:
-    app: app1
-images:
-- name: nginx
-  newTag: 1.11.13
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: app1
