@@ -13,8 +13,9 @@ on `app1.yaml` and `app2.yaml`:
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
     argocd-image-updater.argoproj.io/write-back-target: kustomization
 ```
-Or run with the default `argocd` write-back-target by removing the above 2 annotations,
-or by setting write-back-target to `argocd`:
+The default `argocd` write-back-target can be configured by removing the above 2 annotations,
+or by setting write-back-target to `argocd`. But this mode does not quite work with appset
+(see https://github.com/argoproj-labs/argocd-image-updater/issues/186)
 ```yaml
     argocd-image-updater.argoproj.io/write-back-method: argocd
 ```
