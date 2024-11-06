@@ -1,0 +1,8 @@
+resources:
+  - ../../base
+nameSuffix: "2"
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app: app2
