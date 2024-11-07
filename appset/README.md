@@ -15,7 +15,8 @@ on `app1.yaml` and `app2.yaml`:
 ```
 The default `argocd` write-back-target can be configured by removing the above 2 annotations,
 or by setting write-back-target to `argocd`. But this mode does not quite work with appset
-(see https://github.com/argoproj-labs/argocd-image-updater/issues/186)
+(see https://github.com/argoproj-labs/argocd-image-updater/issues/186,
+https://github.com/argoproj-labs/argocd-image-updater/issues/400)
 ```yaml
     argocd-image-updater.argoproj.io/write-back-method: argocd
 ```
