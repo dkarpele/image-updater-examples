@@ -14,12 +14,24 @@ on `app1.yaml` and `app2.yaml`:
     argocd-image-updater.argoproj.io/write-back-target: kustomization
 ```
 The default `argocd` write-back-target can be configured by removing the above 2 annotations,
-or by setting write-back-target to `argocd`. But this mode does not quite work with appset
-(see https://github.com/argoproj-labs/argocd-image-updater/issues/186,
-https://github.com/argoproj-labs/argocd-image-updater/issues/400)
+or by setting write-back-target to `argocd`. 
 ```yaml
     argocd-image-updater.argoproj.io/write-back-method: argocd
 ```
+
+Make sure the applicationset is configured to
+ignore kustomize images differences in generated applications:
+```yaml
+kind: ApplicationSet
+spec:
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/source/kustomize/images
+```
+See the issues below for potential issues when running argocd-image-updater with applicationset
+using `argocd-image-updater.argoproj.io/write-back-method: argocd`
+* https://github.com/argoproj-labs/argocd-image-updater/issues/186
+* https://github.com/argoproj-labs/argocd-image-updater/issues/400
 
 ## test appset
 ```bash
