@@ -8,9 +8,11 @@ metadata:
     argocd-image-updater.argoproj.io/update-strategy: semver
     argocd-image-updater.argoproj.io/force-update: "false"
     argocd-image-updater.argoproj.io/nginx.helm.image-name: image.repository
+    argocd-image-updater.argoproj.io/nginx.helm.image-tag: image.tag
     argocd-image-updater.argoproj.io/git-repository: https://github.com/chengfang/image-updater-examples.git
+    argocd-image-updater.argoproj.io/git-branch: main
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
-    argocd-image-updater.argoproj.io/write-back-target: helmvalues
+    argocd-image-updater.argoproj.io/write-back-target: helmvalues:/write-helmvalues/source2/values.yaml
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
