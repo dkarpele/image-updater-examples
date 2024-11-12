@@ -21,6 +21,23 @@ argocd-image-updater.argoproj.io/git-branch: main
 argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
 argocd-image-updater.argoproj.io/write-back-target: helmvalues:/write-helmvalues/source2/values.yaml
 ```
+
+To configure git write-back to use the default target file, `.argocd-source-<appName>.yaml`,
+remove the following line from application annotations:
+```yaml
+argocd-image-updater.argoproj.io/write-back-target: helmvalues
+```
+
+To configure the application to use the default write-back-method, `argocd`, remove these lines
+from application annotations. With `argocd` write-back-method, no updates will be committed to
+the git repository.
+```yaml
+argocd-image-updater.argoproj.io/git-repository: https://github.com/chengfang/image-updater-examples.git
+argocd-image-updater.argoproj.io/git-branch: main
+argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+argocd-image-updater.argoproj.io/write-back-target: helmvalues:/write-helmvalues/source2/values.yaml
+```
+
 ## test with write-helmvalues
 ```bash
 # to create the secret to access the git repo
