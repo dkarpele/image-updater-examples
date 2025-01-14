@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: image-list-kustomize
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: nginx=nginx:1.16.x, nginx2=bitnami/nginx:1.16.x
+    argocd-image-updater.argoproj.io/update-strategy: semver
+    argocd-image-updater.argoproj.io/force-update: "false"
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: in-cluster
+    namespace: argocd
+  project: default
+  source:
+      repoURL: https://github.com/chengfang/image-updater-examples.git
+      targetRevision: main
+      path: image-list-kustomize/source
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
