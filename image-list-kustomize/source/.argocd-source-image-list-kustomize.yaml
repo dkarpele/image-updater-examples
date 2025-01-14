@@ -1,0 +1,4 @@
+kustomize:
+  images:
+  - nginx:1.16.1
+  - bitnami/nginx:1.16.1
