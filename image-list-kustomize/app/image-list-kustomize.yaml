@@ -6,6 +6,8 @@ metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: nginx=nginx:latest, nginx2=bitnami/nginx:latest
     argocd-image-updater.argoproj.io/update-strategy: digest
+    argocd-image-updater.argoproj.io/nginx.platforms: linux/arm64,linux/amd64
+    argocd-image-updater.argoproj.io/nginx2.platforms: linux/arm64,linux/amd64
     argocd-image-updater.argoproj.io/force-update: "false"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
