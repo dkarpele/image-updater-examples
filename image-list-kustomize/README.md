@@ -1,11 +1,16 @@
-This example contains a kustomize app that contains annotations to configure
-multiple images and git write-back method. 
-`deployment.yaml` uses an old version of nginx: `1.16.0`, and upon running
-image-updater, the container image tag should be updated to `1.16.1`
+This is a kustomize sample app that configures multiple updateable images via
+`argocd-image-updater.argoproj.io/image-list` annotation. All images in that
+annotation value should be updated after a successful updater run.
+
+`deployment.yaml` uses image `nginx:latest`, and `deployment2.yaml` uses a
+different image `bitnami/nginx:latest`.
+
+When using `digest` update strategy, these image tags will be updated to the 
+digest matching the most recent version of the configured mutable tag.
 
 ## test image-list-kustomize app
 ```bash
-# to create the secret to access the git repo
+# to create the secret to access the git repo, if using git write-back-method
 kubectl -n argocd create secret generic git-creds --from-literal=username=xxx --from-literal=password=xxx
 
 # to install the image-list-kustomize Argo CD application as a plain manifest
@@ -16,11 +21,11 @@ kubectl get pod -l app=image-list-kustomize -n argocd
 
 # to view the current container image name and image tag
 kubectl get pod -l app=image-list-kustomize -n argocd -o jsonpath='{.items[0].spec.containers[0].image}'
-nginx:1.16.0
+nginx:latest
 
 # to check the updated image tag
 kubectl get pod -l app=image-list-kustomize -n argocd -o jsonpath='{.items[0].spec.containers[0].image}'
-nginx:1.16.1
+nginx:latest@sha256:0a399eb
 
 # to delete the app
 kubectl delete -f image-list-kustomize/app/image-list-kustomize.yaml
