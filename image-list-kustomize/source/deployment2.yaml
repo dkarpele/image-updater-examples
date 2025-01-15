@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
       - name: nginx2
-        image: bitnami/nginx:1.16.0
+        image: bitnami/nginx:latest

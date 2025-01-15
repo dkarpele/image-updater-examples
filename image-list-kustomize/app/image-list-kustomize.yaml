@@ -4,10 +4,9 @@ metadata:
   name: image-list-kustomize
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: nginx=nginx:1.16.x, nginx2=bitnami/nginx:1.16.x
-    argocd-image-updater.argoproj.io/update-strategy: semver
+    argocd-image-updater.argoproj.io/image-list: nginx=nginx:latest, nginx2=bitnami/nginx:latest
+    argocd-image-updater.argoproj.io/update-strategy: digest
     argocd-image-updater.argoproj.io/force-update: "false"
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
