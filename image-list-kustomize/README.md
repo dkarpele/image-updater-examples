@@ -8,6 +8,16 @@ different image `bitnami/nginx:latest`.
 When using `digest` update strategy, these image tags will be updated to the 
 digest matching the most recent version of the configured mutable tag.
 
+To use `git` write-back-method, add the following annotation to the application yaml:
+```yaml
+argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+```
+To use `argocd` write-back-method (the default), remove the above annotation, or set
+its value to `argocd`:
+```yaml
+argocd-image-updater.argoproj.io/write-back-method: argocd
+```
+
 ## test image-list-kustomize app
 ```bash
 # to create the secret to access the git repo, if using git write-back-method
