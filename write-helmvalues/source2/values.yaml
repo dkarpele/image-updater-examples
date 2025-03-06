@@ -1,8 +1,8 @@
 # See https://argocd-image-updater.readthedocs.io/en/latest/basics/update-methods/#git-write-back-target
 image:
   registry: docker.io
-  repository: docker.io/bitnami/nginx
-  tag: 1.27.4 # 1.27.1 is not the latest, and is eligible for update
+  repository: bitnami/nginx
+  tag: 1.27.1  # 1.27.1 is not the latest, and is eligible for update
 env:
   - name: ENVIRONMENT
     value: production
