@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-addons
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://10.42.0.1:30003/testdata.git
+        revision: HEAD
+        pathParamPrefix: app
+        directories:
+          - path: 010-appset/cluster-addons/*
+  template:
+    metadata:
+      name: '{{ .app.path.basename }}'
+      namespace: argocd
+      annotations:
+        argocd-image-updater.argoproj.io/image-list: test=gcr.io/heptio-images/ks-guestbook-demo:0.2
+        argocd-image-updater.argoproj.io/update-strategy: digest
+        argocd-image-updater.argoproj.io/test.helm.image-name: containers.fakewebserver.image
+        argocd-image-updater.argoproj.io/test.helm.image-tag: containers.fakewebserver.tag
+        argocd-image-updater.argoproj.io/write-back-method: git
+        argocd-image-updater.argoproj.io/git-branch: master
+        argocd-image-updater.argoproj.io/git-repository: https://10.42.0.1:30003/testdata.git
+        argocd-image-updater.argoproj.io/write-back-target: "helmvalues:/{{ .app.path.path }}/values.yaml"
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: "default"
+      source:
+        repoURL: https://10.42.0.1:30003/testdata.git
+        targetRevision: HEAD
+        path: '{{ .app.path.path }}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: argocd
+#      syncPolicy:
+#        automated:
+#          prune: false
+#        retry:
+#          limit: 2
