@@ -1,0 +1,4 @@
+kustomize:
+  images:
+  - nginx:1.17.10@sha256:6fff55753e3b34e36e24e37039ee9eae1fe38a6420d8ae16ef37c92d1eb26699
+  - gcr.io/heptio-images/ks-guestbook-demo:0.2@sha256:e6fbd640820c32c847a53b93eb7b404f25ffb56df1cc16d0711eec3a405d6509

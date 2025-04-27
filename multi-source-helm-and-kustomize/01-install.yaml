@@ -15,11 +15,11 @@ spec:
   project: default
   sources:
     - repoURL: https://github.com/dkarpele/image-updater-examples.git
-      path: ./multi-source-helm-and-kustomize/008-simple-helm-app
-      targetRevision: HEAD
-    - repoURL: https://github.com/dkarpele/image-updater-examples.git
       path: ./multi-source-helm-and-kustomize/001-simple-kustomize-app
       targetRevision: master
+    - repoURL: https://github.com/dkarpele/image-updater-examples.git
+      path: ./multi-source-helm-and-kustomize/008-simple-helm-app
+      targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
