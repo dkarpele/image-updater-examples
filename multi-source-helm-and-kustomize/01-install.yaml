@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sources
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: test-nginx=nginx:1.17.10,test1=gcr.io/heptio-images/ks-guestbook-demo:0.2
+    argocd-image-updater.argoproj.io/update-strategy: digest
+    argocd-image-updater.argoproj.io/force-update: "false"
+    argocd-image-updater.argoproj.io/write-back-method: git
+    # argocd-image-updater.argoproj.io/write-back-target: kustomization
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/dkarpele/image-updater-examples.git
+      path: ./multi-source-helm-and-kustomize/008-simple-helm-app
+      targetRevision: HEAD
+    - repoURL: https://github.com/dkarpele/image-updater-examples.git
+      path: ./multi-source-helm-and-kustomize/001-simple-kustomize-app
+      targetRevision: master
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated: {}
+    retry:
+      limit: 2
