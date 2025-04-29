@@ -1,0 +1,11 @@
+helm:
+  parameters:
+  - name: env
+    value: eu
+    forcestring: false
+  - name: image.repository
+    value: gcr.io/heptio-images/ks-guestbook-demo
+    forcestring: true
+  - name: image.tag
+    value: "0.2"
+    forcestring: true
