@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: write-helmvalues
+  name: empty-helmvalues
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: nginx=docker.io/bitnamilegacy/nginx:1.27.x
@@ -12,7 +12,7 @@ metadata:
     argocd-image-updater.argoproj.io/git-repository: https://github.com/chengfang/image-updater-examples.git
     argocd-image-updater.argoproj.io/git-branch: main
     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
-    argocd-image-updater.argoproj.io/write-back-target: helmvalues:/write-helmvalues/source2/values.yaml
+    argocd-image-updater.argoproj.io/write-back-target: helmvalues:/empty-helmvalues/source2/values.yaml
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -26,7 +26,8 @@ spec:
       chart: nginx
       helm:
         valueFiles:
-          - $values/write-helmvalues/source2/values.yaml
+          - $values/empty-helmvalues/source2/values-0.yaml
+          - $values/empty-helmvalues/source2/values.yaml
     - repoURL: https://github.com/chengfang/image-updater-examples.git
       targetRevision: main
       ref: values
