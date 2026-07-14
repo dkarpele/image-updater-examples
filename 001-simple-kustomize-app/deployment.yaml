@@ -18,5 +18,5 @@ spec:
         - name: e2e-registry-pull-secret
       containers:
       - name: test
-        image: 127.0.0.1:30000/test-image:1.0.0
+        image: quay.io/dkarpele/my-guestbook:1.0.0
 
