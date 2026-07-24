@@ -1,0 +1,24 @@
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: example-vm2-disk-boot
+  namespace: demo
+  ownerReferences:
+    - apiVersion: kubevirt.io/v1
+      kind: VirtualMachine
+      name: example-vm2
+      uid: ""          # populated by Kubernetes at runtime
+      controller: true
+      blockOwnerDeletion: true
+spec:
+  source:
+    pvc:
+      namespace: vm-templates
+      name: base-image-latest
+  storage:
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: 50Gi
+    storageClassName: standard

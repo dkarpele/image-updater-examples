@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: example-vm2-disk-boot
+  namespace: demo
+  ownerReferences:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      kind: DataVolume
+      name: example-vm2-disk-boot
+      uid: ""          # populated by Kubernetes at runtime
+      controller: true
+      blockOwnerDeletion: true
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: standard
+  volumeMode: Filesystem

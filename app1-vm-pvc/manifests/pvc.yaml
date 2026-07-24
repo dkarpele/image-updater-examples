@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: example-vm-disk-boot
+  namespace: demo
+  ownerReferences:
+    - apiVersion: kubevirt.io/v1
+      kind: VirtualMachine
+      name: example-vm
+      uid: ""          # populated by Kubernetes at runtime
+      controller: false
+      blockOwnerDeletion: true
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: standard
+  volumeMode: Filesystem

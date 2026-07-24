@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app1-vm-pvc
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dkarpele/image-updater-examples
+    targetRevision: HEAD
+    path: app1-vm-pvc/manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated: {}

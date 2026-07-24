@@ -1,0 +1,24 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: example-vm
+  namespace: demo
+spec:
+  running: true
+  template:
+    spec:
+      domain:
+        cpu:
+          cores: 2
+          sockets: 1
+        memory:
+          guest: 4Gi
+        devices:
+          disks:
+            - name: disk-boot
+              disk:
+                bus: virtio
+      volumes:
+        - name: disk-boot
+          persistentVolumeClaim:
+            claimName: example-vm-disk-boot
