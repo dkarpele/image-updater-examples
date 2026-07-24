@@ -2,12 +2,12 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: example-vm-disk-boot
-  namespace: demo
+  namespace: argocd
   ownerReferences:
     - apiVersion: kubevirt.io/v1
       kind: VirtualMachine
       name: example-vm
-      uid: ""          # populated by Kubernetes at runtime
+      uid: "6fe49cfc-1d1a-4561-98eb-07c41500254d"         # populated by Kubernetes at runtime
       controller: false
       blockOwnerDeletion: true
 spec:
