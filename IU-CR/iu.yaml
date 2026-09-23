@@ -7,6 +7,10 @@ metadata:
   name: image-updater-005
   namespace: argocd
 spec:
+  imagesVerification:
+    cosignKey:
+      secretName: myapp-cosign-pubkey
+      key: cosign.pub
   applicationRefs:
     - namePattern: "*-01"
       images:
