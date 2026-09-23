@@ -11,6 +11,6 @@ spec:
     - namePattern: "*-01"
       images:
         - alias: "guestbook"
-          imageName: "quay.io/dkarpele/my-guestbook:~1.0"
+          imageName: "quay.io/dkarpele/wrong:~1.0"
           commonUpdateSettings:
             updateStrategy: "semver"
